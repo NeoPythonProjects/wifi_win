@@ -1,0 +1,76 @@
+#:kivy 2.1.0
+<RVButton>:
+    canvas.before:
+        Color:
+            rgba: 0.5,0.5,0.5,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 1,0,0,1
+        Line:
+            width: 0.5
+            rectangle: self.x, self.y, self.width, self.height
+
+<RVScreen>:
+    BoxLayout:
+        padding: 20, 20
+        spacing: 10
+        orientation: 'vertical'
+        Label:
+            size_hint_y: 0.2
+            text: 'Network Password Recovery'
+            font_size: 50
+            canvas.before:
+                Color:
+                    rgba: (0.5,0.5,0.5,1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        RV:
+            canvas.before:
+                Color:
+                    rgba: 0,0,1,1
+                Line:
+                    width: 0.5
+                    rectangle: self.x, self.y, self.width, self.height
+            id: rv
+            viewclass: 'RVButton'
+            data: self.rv_data_list
+            scroll_type: ['bars', 'content']
+            bar_width: 10
+            RecycleBoxLayout:
+                default_size: None, None #dp(48)
+                default_size_hint: 1, None
+                height: self.minimum_height
+                orientation: 'vertical'
+
+<PWScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            cols: 2
+            Label:
+                size_hint_x: 0.3
+                text: 'Network:'
+            Label:
+                id: lbl_network
+                font_size: 50
+        GridLayout:
+            cols: 2
+            Label:
+                size_hint_x: 0.3
+                text: 'Password:'
+            Label:
+                id: lbl_pw
+                font_size: 50
+
+
+BoxLayout:
+    orientation: 'vertical'
+    ScreenManager:
+        id: sm
+        RVScreen:
+        PWScreen:
+            name: 'pw_screen'
